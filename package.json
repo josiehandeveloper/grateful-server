@@ -30,6 +30,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.17",
     "morgan": "^1.10.0",
+    "pg": "^8.5.1",
     "postgrator-cli": "^4.0.0",
     "xss": "^1.0.8"
   },
