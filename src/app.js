@@ -8,14 +8,14 @@ const knex = require("knex");
 
 const app = express();
 
-const morganOption = NODE_ENV === "production" ? "tiny" : "common";
+const morganSetting = NODE_ENV === "production" ? "tiny" : "common";
 const usersRouter = require("./users/users-router");
 const authRouter = require("./auth/auth-router");
 const postsRouter = require("./posts/posts-router");
 const profileRouter = require("./profile/profile-router");
 
 app.use(express.json());
-app.use(morgan(morganOption));
+app.use(morgan(morganSetting));
 app.use(helmet());
 app.use(cors());
 
