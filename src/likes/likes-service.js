@@ -1,18 +1,45 @@
 const LikesService = {
-  getAllLikes(knex) {
-    return knex.select("*").from("likes");
+  getById(db, id) {
+    return db
+      .from("likes")
+      .select(
+        "like.id",
+        "like.count",
+        "like.date_created",
+        "like.post_id",
+        db.raw(
+          `json_strip_nulls(
+            row_to_json(
+              (SELECT tmp FROM (
+                SELECT
+                  usr.id,
+                  usr.username,
+              ) tmp)
+            )
+          ) AS "user"`
+        )
+      )
+      .leftJoin("users AS usr", "like.user_id", "usr.id")
+      .where("like.id", id)
+      .first();
   },
-  insertLike(knex, newLike) {
-    return knex
+
+  insertLike(db, newLike) {
+    return db
       .insert(newLike)
       .into("likes")
       .returning("*")
-      .then((row) => {
-        return row[0];
-      });
+      .then(([like]) => like)
+      .then((like) => LikesService.getById(db, like.id));
   },
-  getById(knex, id) {
-    return knex.from("likes").select("*").where("id", id).first();
+
+  serializeLike(like) {
+    return {
+      id: like.id,
+      post_id: like.post_id,
+      date_created: like.date_created,
+      user: like.user,
+    };
   },
 };
 

@@ -13,6 +13,7 @@ const usersRouter = require("./users/users-router");
 const authRouter = require("./auth/auth-router");
 const postsRouter = require("./posts/posts-router");
 const profileRouter = require("./profile/profile-router");
+const likesRouter = require("./likes/likes-router");
 
 app.use(express.json());
 app.use(morgan(morganSetting));
@@ -22,6 +23,7 @@ app.use(cors());
 app.use("/api/users", usersRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/feed", postsRouter);
+app.use("/api/likes", likesRouter);
 app.use("/api/dashboard", profileRouter);
 
 app.use(function errorHandler(error, req, res, next) {

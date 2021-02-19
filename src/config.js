@@ -5,6 +5,6 @@ module.exports = {
     process.env.DATABASE_URL || "postgresql://josephinghan@localhost/grateful",
   TEST_DATABASE_URL:
     process.env.TEST_DATABASE_URL ||
-    "postgresql://josephinghan@localhost/grateful-test",
+    "postgresql://josephinehan@localhost/grateful-test",
   JWT_SECRET: process.env.JWT_SECRET || "grateful-jwt",
 };
